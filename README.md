@@ -6,21 +6,21 @@ To run the sketch, open `index.html` in Google Chrome using Live Server.
 
 The goal is to trying to get to the other side to the door to go to the next level without getting caught by the wolf and avoid the traps. You will be given 3 chances if you use up all 3 lives you restart the whole game. 
 
-## Controls
+**Controls**
 - A / Left Arrow: move left
 - D / Right Arrow: move right
 - W / Up Arrow / Space: jump
 - R: reset the current attempt
 - Enter: start or continue
 
-## Platform types
+**Platform types**
 - `ground`
 - `normal`
 - `bounce`
 - `moving`
 - `falling`
 
-## Trap types
+**Trap types**
 - `hiddenSpikes`
 - `fakeStrawberry`
 - `rollingLog`
