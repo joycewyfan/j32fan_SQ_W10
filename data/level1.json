@@ -1,0 +1,161 @@
+{
+  "name": "Sunny Meadow",
+  "worldWidth": 3000,
+  "start": {
+    "x": 90,
+    "y": 350
+  },
+  "exit": {
+    "x": 2860,
+    "y": 330,
+    "w": 90,
+    "h": 80
+  },
+  "platforms": [
+    {
+      "x": 0,
+      "y": 410,
+      "w": 520,
+      "h": 40,
+      "type": "ground"
+    },
+    {
+      "x": 610,
+      "y": 410,
+      "w": 430,
+      "h": 40,
+      "type": "ground"
+    },
+    {
+      "x": 1130,
+      "y": 410,
+      "w": 400,
+      "h": 40,
+      "type": "ground"
+    },
+    {
+      "x": 1630,
+      "y": 410,
+      "w": 450,
+      "h": 40,
+      "type": "ground"
+    },
+    {
+      "x": 2170,
+      "y": 410,
+      "w": 830,
+      "h": 40,
+      "type": "ground"
+    },
+    {
+      "x": 250,
+      "y": 330,
+      "w": 120,
+      "h": 18,
+      "type": "normal"
+    },
+    {
+      "x": 470,
+      "y": 280,
+      "w": 110,
+      "h": 18,
+      "type": "bounce",
+      "bounceStrength": -15
+    },
+    {
+      "x": 740,
+      "y": 330,
+      "w": 130,
+      "h": 18,
+      "type": "normal"
+    },
+    {
+      "x": 970,
+      "y": 270,
+      "w": 120,
+      "h": 18,
+      "type": "falling",
+      "fallDelay": 45
+    },
+    {
+      "x": 1250,
+      "y": 320,
+      "w": 140,
+      "h": 18,
+      "type": "normal"
+    },
+    {
+      "x": 1500,
+      "y": 260,
+      "w": 130,
+      "h": 18,
+      "type": "moving",
+      "distance": 120,
+      "speed": 1.1
+    },
+    {
+      "x": 1780,
+      "y": 310,
+      "w": 130,
+      "h": 18,
+      "type": "bounce",
+      "bounceStrength": -17
+    },
+    {
+      "x": 2020,
+      "y": 260,
+      "w": 130,
+      "h": 18,
+      "type": "normal"
+    },
+    {
+      "x": 2290,
+      "y": 315,
+      "w": 130,
+      "h": 18,
+      "type": "normal"
+    },
+    {
+      "x": 2510,
+      "y": 270,
+      "w": 150,
+      "h": 18,
+      "type": "normal"
+    }
+  ],
+  "traps": [
+    {
+      "type": "hiddenSpikes",
+      "x": 690,
+      "y": 382,
+      "w": 70,
+      "h": 28,
+      "triggerX": 640
+    },
+    {
+      "type": "fakeStrawberry",
+      "x": 1320,
+      "y": 285,
+      "w": 24,
+      "h": 28,
+      "push": -11
+    },
+    {
+      "type": "rollingLog",
+      "x": 1900,
+      "y": 378,
+      "w": 52,
+      "h": 32,
+      "triggerX": 1740,
+      "speed": -4
+    },
+    {
+      "type": "hiddenSpikes",
+      "x": 2390,
+      "y": 382,
+      "w": 75,
+      "h": 28,
+      "triggerX": 2320
+    }
+  ]
+}

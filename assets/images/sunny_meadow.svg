@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c7f1ff"/>
+      <stop offset="100%" stop-color="#f6f1c8"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8ecf6f"/>
+      <stop offset="100%" stop-color="#5fa14a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <circle cx="685" cy="90" r="42" fill="#ffe08a"/>
+  <circle cx="675" cy="80" r="50" fill="#fff1b6" opacity="0.45"/>
+  <g fill="#ffffff" opacity="0.9">
+    <ellipse cx="115" cy="82" rx="34" ry="18"/>
+    <ellipse cx="142" cy="76" rx="28" ry="15"/>
+    <ellipse cx="170" cy="84" rx="38" ry="17"/>
+    <ellipse cx="545" cy="68" rx="28" ry="14"/>
+    <ellipse cx="568" cy="62" rx="22" ry="12"/>
+    <ellipse cx="595" cy="70" rx="30" ry="15"/>
+  </g>
+  <path d="M0 322 C120 276 200 264 300 292 C377 313 447 344 520 330 C605 312 690 258 800 282 L800 450 L0 450 Z" fill="url(#hill)"/>
+  <path d="M0 362 C95 329 182 324 265 347 C355 371 441 396 538 378 C630 360 707 318 800 339 L800 450 L0 450 Z" fill="#4e8f41" opacity="0.65"/>
+  <g fill="#ffd86b">
+    <circle cx="95" cy="370" r="4"/>
+    <circle cx="130" cy="392" r="4"/>
+    <circle cx="205" cy="380" r="4"/>
+    <circle cx="255" cy="399" r="4"/>
+    <circle cx="340" cy="387" r="4"/>
+    <circle cx="410" cy="402" r="4"/>
+    <circle cx="570" cy="390" r="4"/>
+    <circle cx="650" cy="376" r="4"/>
+    <circle cx="715" cy="395" r="4"/>
+  </g>
+  <g stroke="#7db656" stroke-width="6" stroke-linecap="round">
+    <path d="M70 420 l0 -20"/>
+    <path d="M96 422 l0 -16"/>
+    <path d="M145 419 l0 -22"/>
+    <path d="M205 421 l0 -18"/>
+    <path d="M320 420 l0 -24"/>
+    <path d="M530 420 l0 -20"/>
+    <path d="M620 421 l0 -18"/>
+    <path d="M730 419 l0 -22"/>
+  </g>
+</svg>

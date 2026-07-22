@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10172f"/>
+      <stop offset="100%" stop-color="#2b2f4d"/>
+    </linearGradient>
+    <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#night)"/>
+  <g fill="#f6f1cc">
+    <circle cx="650" cy="86" r="34"/>
+    <circle cx="635" cy="78" r="36" fill="#e9f0ff" opacity="0.35"/>
+    <circle cx="60" cy="70" r="2"/>
+    <circle cx="95" cy="38" r="2"/>
+    <circle cx="145" cy="92" r="1.7"/>
+    <circle cx="210" cy="52" r="1.8"/>
+    <circle cx="300" cy="82" r="1.6"/>
+    <circle cx="410" cy="42" r="2"/>
+    <circle cx="520" cy="92" r="1.7"/>
+    <circle cx="735" cy="42" r="2"/>
+  </g>
+  <rect y="250" width="800" height="200" fill="url(#mist)"/>
+  <path d="M0 325 C110 292 172 282 256 302 C340 322 420 360 500 346 C592 328 660 284 800 304 L800 450 L0 450 Z" fill="#1e472f"/>
+  <path d="M0 365 C125 332 208 326 298 344 C395 364 462 392 550 380 C642 366 710 335 800 351 L800 450 L0 450 Z" fill="#132c1d"/>
+  <g fill="#0d1d12">
+    <rect x="52" y="187" width="18" height="237" rx="8"/>
+    <circle cx="58" cy="200" r="32"/>
+    <rect x="115" y="209" width="16" height="215" rx="8"/>
+    <circle cx="123" cy="220" r="28"/>
+    <rect x="685" y="176" width="18" height="248" rx="8"/>
+    <circle cx="694" cy="192" r="34"/>
+    <rect x="735" y="198" width="14" height="226" rx="7"/>
+    <circle cx="742" cy="209" r="26"/>
+  </g>
+  <g fill="#173524">
+    <ellipse cx="58" cy="240" rx="58" ry="28"/>
+    <ellipse cx="123" cy="252" rx="50" ry="24"/>
+    <ellipse cx="694" cy="235" rx="62" ry="30"/>
+    <ellipse cx="742" cy="248" rx="44" ry="22"/>
+  </g>
+</svg>
