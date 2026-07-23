@@ -4,7 +4,7 @@
 
 To run the sketch, open `index.html` in Google Chrome using Live Server.
 
-The goal is to trying to get to the other side to the door to go to the next level without getting caught by the wolf and avoid the traps. You will be given 3 chances if you use up all 3 lives you restart the whole game. 
+The goal is to trying to get to the other side to the door to go to the next level without getting caught by the wolf and avoid the traps. You will be given 3 chances if you use up all 3 lives you restart the whole game. There will be apples displayed in the gaem but it si not necessary to collect all of them to win the whole game. 
 
 **Controls**
 - A / Left Arrow: move left
