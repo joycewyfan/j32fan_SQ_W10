@@ -26,6 +26,14 @@ The goal is to trying to get to the other side to the door to go to the next lev
 - `rollingLog`
 - `fallingBranch`
 
+There is a debug panel. To use it press **E** that will show at the bottom of the screen. Then you can press the key that correspond to the shortcuts. 
+
+**Keyboard shortcuts:**
+- 1, 2: jump to that level 
+- S or s: jump to the start screen 
+- W or w: jump to the win screen (All Levels)
+- O or o: jumpp to the restart screen 
+
 ## Assets
 | File |  Source |
 |----|----|
@@ -39,6 +47,8 @@ The goal is to trying to get to the other side to the door to go to the next lev
 | `assets/audio/background.mp3` [4]| pixabay.com |
 | `assets/audio/hit.mp3` [5]| pixabay.com |
 | `assets/audio/startscreen.mp3` [6]| pixabay.com |
+| `assets/audio/winscreen.mp3` [7]| pixabay.com |
+| `assets/audio/losescreen.mp3` [8]| pixabay.com |
 
 ## References
 
@@ -48,3 +58,5 @@ The goal is to trying to get to the other side to the door to go to the next lev
 [4] https://pixabay.com/sound-effects/musical-enchanted-fantasy-30-sec-classical-music-535322/ 
 [5] https://pixabay.com/sound-effects/film-special-effects-punching-light-armour-87442/
 [6] https://pixabay.com/sound-effects/musical-quirky-funny-positive-whistle-30-sec-481085/ 
+[7] https://pixabay.com/sound-effects/musical-happy-music-loop-500008/
+[8] https://pixabay.com/sound-effects/musical-classical-violin-music-478144/

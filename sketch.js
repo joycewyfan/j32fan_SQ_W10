@@ -12,6 +12,7 @@ const INVINCIBLE_FRAMES = 75;
 const WOLF_HIT_SLOW_FRAMES = 90;
 const WOLF_RESTART_HITS = 3;
 const WOLF_CHASE_START_DISTANCE = 140;
+const DEBUG_PANEL_HEIGHT = 72;
 
 const STATE_TITLE = "title";
 const STATE_PLAY = "play";
@@ -34,7 +35,10 @@ let backgroundMusic;
 let startScreenSound;
 let hitSound;
 let loseSound;
+let loseScreenSound;
 let winSound;
+let winScreenSound;
+let debugPanelVisible = false;
 
 let platforms = [];
 let traps = [];
@@ -83,7 +87,9 @@ function preload() {
   startScreenSound = loadSound("assets/audio/startscreen.mp3");
   hitSound = loadSound("assets/audio/hit.mp3");
   loseSound = loadSound("assets/audio/lose.mp3");
+  loseScreenSound = loadSound("assets/audio/losescreen.mp3");
   winSound = loadSound("assets/audio/win.mp3");
+  winScreenSound = loadSound("assets/audio/winscreen.mp3");
 }
 
 function playBackgroundMusic() {
@@ -112,6 +118,18 @@ function stopBackgroundMusic() {
   }
 }
 
+function stopLoseScreenSound() {
+  if (loseScreenSound && loseScreenSound.isPlaying()) {
+    loseScreenSound.stop();
+  }
+}
+
+function stopWinScreenSound() {
+  if (winScreenSound && winScreenSound.isPlaying()) {
+    winScreenSound.stop();
+  }
+}
+
 function playAppleSound() {
   if (appleSound) {
     appleSound.play();
@@ -130,10 +148,60 @@ function playLoseSound() {
   }
 }
 
+function playLoseScreenSound() {
+  if (loseScreenSound && !loseScreenSound.isPlaying()) {
+    loseScreenSound.setVolume(0.4);
+    loseScreenSound.loop();
+  }
+}
+
 function playWinSound() {
   if (winSound) {
     winSound.play();
   }
+}
+
+function playWinScreenSound() {
+  if (winScreenSound) {
+    if (!winScreenSound.isPlaying()) {
+      winScreenSound.setVolume(0.4);
+      winScreenSound.loop();
+    }
+  }
+}
+
+function goToLevel(levelNumber) {
+  player.health = player.maxHealth;
+  initializeLevel(levelNumber);
+  stopStartScreenSound();
+  stopWinScreenSound();
+  stopLoseScreenSound();
+  gameState = STATE_PLAY;
+  playBackgroundMusic();
+}
+
+function goToStartScreen() {
+  stopBackgroundMusic();
+  stopStartScreenSound();
+  stopWinScreenSound();
+  stopLoseScreenSound();
+  gameState = STATE_TITLE;
+}
+
+function goToWinScreen() {
+  stopBackgroundMusic();
+  stopStartScreenSound();
+  stopLoseScreenSound();
+  playWinScreenSound();
+  gameState = STATE_VICTORY;
+}
+
+function goToLoseScreen() {
+  stopBackgroundMusic();
+  stopStartScreenSound();
+  stopWinScreenSound();
+  playLoseScreenSound();
+  gameState = STATE_GAME_OVER;
 }
 
 // ============================================================
@@ -150,29 +218,50 @@ function setup() {
 // ============================================================
 function draw() {
   if (gameState === STATE_TITLE) {
+    stopBackgroundMusic();
+    stopWinScreenSound();
+    stopLoseScreenSound();
     playStartScreenSound();
     drawTitleScreen();
+    drawDebugPanel();
     return;
   }
 
   stopStartScreenSound();
 
   if (gameState === STATE_LEVEL_COMPLETE) {
+    stopBackgroundMusic();
+    stopWinScreenSound();
+    stopLoseScreenSound();
     drawLevelCompleteScreen();
+    drawDebugPanel();
     return;
   }
 
   if (gameState === STATE_GAME_OVER) {
+    stopBackgroundMusic();
+    stopWinScreenSound();
+    playLoseScreenSound();
     drawGameOverScreen();
+    drawDebugPanel();
     return;
   }
 
   if (gameState === STATE_VICTORY) {
+    stopBackgroundMusic();
+    playWinScreenSound();
+    stopLoseScreenSound();
     drawVictoryScreen();
+    drawDebugPanel();
     return;
   }
 
+  stopStartScreenSound();
+  stopWinScreenSound();
+  stopLoseScreenSound();
+  playBackgroundMusic();
   drawGameplay();
+  drawDebugPanel();
 }
 
 // ============================================================
@@ -250,17 +339,19 @@ function copyObject(source) {
 function drawGameplay() {
   drawLevelBackground();
 
-  handleInput();
-  applyPhysics();
-  updatePlatforms();
-  resolvePlatformCollisions();
-  updateTraps();
-  updateWolf();
-  checkTrapCollisions();
-  checkWolfCollision();
-  checkExitCollision();
-  updateInvincibility();
-  updateCamera();
+  if (!debugPanelVisible) {
+    handleInput();
+    applyPhysics();
+    updatePlatforms();
+    resolvePlatformCollisions();
+    updateTraps();
+    updateWolf();
+    checkTrapCollisions();
+    checkWolfCollision();
+    checkExitCollision();
+    updateInvincibility();
+    updateCamera();
+  }
 
   push();
   translate(-camX, 0);
@@ -349,6 +440,38 @@ function handleInput() {
 }
 
 function keyPressed() {
+  if (key === "e" || key === "E") {
+    debugPanelVisible = !debugPanelVisible;
+    return;
+  }
+
+  if (debugPanelVisible) {
+    if (key === "1") {
+      goToLevel(1);
+      return;
+    }
+
+    if (key === "2") {
+      goToLevel(2);
+      return;
+    }
+
+    if (key === "s" || key === "S") {
+      goToStartScreen();
+      return;
+    }
+
+    if (key === "w" || key === "W") {
+      goToWinScreen();
+      return;
+    }
+
+    if (key === "o" || key === "O") {
+      goToLoseScreen();
+      return;
+    }
+  }
+
   let jumpPressed =
     keyCode === UP_ARROW ||
     key === "w" ||
@@ -362,15 +485,11 @@ function keyPressed() {
 
   if (gameState === STATE_TITLE && keyCode === ENTER) {
     player.health = player.maxHealth;
-    initializeLevel(1);
-    gameState = STATE_PLAY;
-    playBackgroundMusic();
+    goToLevel(1);
   }
 
   if (gameState === STATE_LEVEL_COMPLETE && keyCode === ENTER) {
-    initializeLevel(2);
-    gameState = STATE_PLAY;
-    playBackgroundMusic();
+    goToLevel(2);
   }
 
   if (
@@ -379,8 +498,7 @@ function keyPressed() {
     (key === "r" || key === "R")
   ) {
     player.health = player.maxHealth;
-    initializeLevel(1);
-    gameState = STATE_TITLE;
+    goToStartScreen();
   }
 
   if (gameState === STATE_PLAY && (key === "r" || key === "R")) {
@@ -391,11 +509,13 @@ function keyPressed() {
 function applyPhysics() {
   player.vy += GRAVITY;
 
+  let previousX = player.x;
   let previousY = player.y;
 
   player.x += player.vx;
   player.y += player.vy;
 
+  player.previousX = previousX;
   player.previousY = previousY;
 
   player.x = constrain(
@@ -448,22 +568,31 @@ function resolvePlatformCollisions() {
 
     let playerLeft = player.x - player.r;
     let playerRight = player.x + player.r;
+    let playerTop = player.y - player.r;
+    let playerBottom = player.y + player.r;
+    let previousLeft = player.previousX - player.r;
+    let previousRight = player.previousX + player.r;
+    let previousTop = player.previousY - player.r;
     let previousBottom = player.previousY + player.r;
-    let currentBottom = player.y + player.r;
 
     let horizontalOverlap =
       playerRight > p.x &&
       playerLeft < p.x + p.w;
 
-    let crossedPlatformTop =
-      previousBottom <= p.y + 5 &&
-      currentBottom >= p.y;
+    let verticalOverlap =
+      playerBottom > p.y &&
+      playerTop < p.y + p.h;
 
-    if (
-      horizontalOverlap &&
-      player.vy >= 0 &&
-      crossedPlatformTop
-    ) {
+    if (!horizontalOverlap || !verticalOverlap) {
+      continue;
+    }
+
+    let hitFromTop = previousBottom <= p.y;
+    let hitFromBottom = previousTop >= p.y + p.h;
+    let hitFromLeft = previousRight <= p.x;
+    let hitFromRight = previousLeft >= p.x + p.w;
+
+    if (hitFromTop && player.vy >= 0) {
       player.y = p.y - player.r;
       player.vy = 0;
       player.onGround = true;
@@ -475,6 +604,41 @@ function resolvePlatformCollisions() {
 
       if (p.type === "falling") {
         p.falling = true;
+      }
+    } else if (hitFromBottom && player.vy < 0) {
+      player.y = p.y + p.h + player.r;
+      player.vy = 0;
+    } else if (hitFromLeft && player.vx > 0) {
+      player.x = p.x - player.r;
+      player.vx = 0;
+    } else if (hitFromRight && player.vx < 0) {
+      player.x = p.x + p.w + player.r;
+      player.vx = 0;
+    } else {
+      let distances = [
+        { side: "top", value: abs(playerBottom - p.y) },
+        { side: "bottom", value: abs(playerTop - (p.y + p.h)) },
+        { side: "left", value: abs(playerRight - p.x) },
+        { side: "right", value: abs(playerLeft - (p.x + p.w)) }
+      ];
+
+      distances.sort(function(a, b) {
+        return a.value - b.value;
+      });
+
+      if (distances[0].side === "top") {
+        player.y = p.y - player.r;
+        player.vy = 0;
+        player.onGround = true;
+      } else if (distances[0].side === "bottom") {
+        player.y = p.y + p.h + player.r;
+        player.vy = 0;
+      } else if (distances[0].side === "left") {
+        player.x = p.x - player.r;
+        player.vx = 0;
+      } else {
+        player.x = p.x + p.w + player.r;
+        player.vx = 0;
       }
     }
   }
@@ -847,7 +1011,7 @@ function checkExitCollision() {
     stopBackgroundMusic();
     gameState = STATE_LEVEL_COMPLETE;
   } else {
-    playWinSound();
+    playWinScreenSound();
     stopBackgroundMusic();
     gameState = STATE_VICTORY;
   }
@@ -973,6 +1137,36 @@ function drawHUD() {
     "Move: A/D or arrows   Jump: W/Up/Space   R: reset",
     25,
     79
+  );
+}
+
+function drawDebugPanel() {
+  if (!debugPanelVisible) {
+    return;
+  }
+
+  let panelY = height - DEBUG_PANEL_HEIGHT;
+
+  noStroke();
+  fill(20, 24, 38, 220);
+  rect(0, panelY, width, DEBUG_PANEL_HEIGHT);
+
+  fill(255);
+  textAlign(LEFT);
+  textSize(14);
+  text("Debug Panel - press E to hide", 16, panelY + 20);
+
+  textSize(12);
+  text(
+    "1: Level 1   2: Level 2   S: Start Screen   W: Win Screen   O: Lose/Restart Screen",
+    16,
+    panelY + 44
+  );
+
+  text(
+    "Use these shortcuts only while the panel is visible.",
+    16,
+    panelY + 62
   );
 }
 
